@@ -4,6 +4,7 @@
   "terminal.integrated.fontFamily": "Geist Mono",
   "custom-ui-style.font.monospace": "Geist Mono",
   "workbench.tree.indent": 16,
+  "workbench.tree.renderIndentGuides": "always",
   "custom-ui-style.stylesheet": {
    ".monaco-workbench": {
       "background-color": "#131217 !important"
