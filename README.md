@@ -31,9 +31,25 @@ A dark color theme for Visual Studio Code inspired by JetBrains' Islands Dark th
 
 This theme has two parts: a **color theme** and **CSS customizations** that create the floating glass panel look.
 
-### Quick Install (Recommended)
+### One-Liner Install (Recommended)
 
-The fastest way to install is using the automated scripts:
+The fastest way to install:
+
+#### macOS/Linux
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/bwya77/vscode-dark-islands/main/bootstrap.sh | bash
+```
+
+#### Windows
+
+```powershell
+irm https://raw.githubusercontent.com/bwya77/vscode-dark-islands/main/bootstrap.ps1 | iex
+```
+
+### Manual Clone Install
+
+If you prefer to clone first:
 
 #### macOS/Linux
 
