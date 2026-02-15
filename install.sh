@@ -103,8 +103,8 @@ const path = require('path');
 
 // Strip JSONC features (comments and trailing commas) for JSON.parse
 function stripJsonc(text) {
-    // Remove single-line comments
-    text = text.replace(/\/\/.*$/gm, '');
+    // Remove single-line comments (but not // inside strings)
+    text = text.replace(/\/\/(?=(?:[^"\\]|\\.)*$)/gm, '');
     // Remove multi-line comments
     text = text.replace(/\/\*[\s\S]*?\*\//g, '');
     // Remove trailing commas before } or ]
@@ -123,7 +123,8 @@ if (process.platform === 'darwin') {
 }
 
 const settingsFile = path.join(settingsDir, 'settings.json');
-const existingSettings = JSON.parse(stripJsonc(fs.readFileSync(settingsFile, 'utf8')));
+const existingText = fs.readFileSync(settingsFile, 'utf8');
+const existingSettings = JSON.parse(stripJsonc(existingText));
 
 // Merge settings - Islands Dark settings take precedence
 const mergedSettings = { ...existingSettings, ...newSettings };
@@ -164,7 +165,9 @@ if [ ! -f "$FIRST_RUN_FILE" ]; then
     echo "   • After VS Code reloads, you may see a 'corrupt installation' warning"
     echo "   • This is expected - click the gear icon and select 'Don't Show Again'"
     echo ""
-    read -p "Press Enter to continue and reload VS Code..."
+    if [ -t 0 ]; then
+        read -p "Press Enter to continue and reload VS Code..."
+    fi
 fi
 
 # Apply custom UI style
